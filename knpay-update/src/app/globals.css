@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Turquoise palette sampled from the design reference */
+  --turq-edge: #067e92;
+  --turq-mid: #05b1ce;
+  --turq-bright: #08ddf0;
+  --turq-light: #0fefef;
+  --turq-line: #2fb4c4;
+}
+
+body {
+  background-color: #141414;
+  color: #E5E7EB;
+}
+
+@layer components {
+  /* Fine brushed-metal turquoise button (also used for the active tab) */
+  .btn-metal {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(15, 239, 240, 0.45);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, 0.22) 100%),
+      linear-gradient(
+        90deg,
+        #046f82 0%,
+        #0b778c 8%,
+        #0197b0 17%,
+        #08ddf0 25%,
+        #03d7e9 33%,
+        #079aae 42%,
+        #0a97ae 50%,
+        #01c5da 58%,
+        #0fefef 67%,
+        #02f3f3 75%,
+        #04b4cd 83%,
+        #067e92 92%,
+        #067c92 100%
+      );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+      0 0 18px rgba(6, 214, 236, 0.18);
+    transition: filter 0.15s ease, transform 0.1s ease;
+  }
+
+  /* Fine horizontal brush grain layered over the gradient */
+  .btn-metal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+    background-size: 300px 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='80'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .btn-metal:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+
+  /* Turquoise outlined dark input */
+  .field-turq {
+    background: #1c1c1c;
+    color: #ffffff;
+    border: 1.5px solid var(--turq-line);
+    box-shadow: 0 0 0 1px rgba(15, 239, 240, 0.08), 0 0 12px rgba(6, 214, 236, 0.12);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field-turq:focus {
+    border-color: var(--turq-light);
+    box-shadow: 0 0 0 1px rgba(15, 239, 240, 0.3), 0 0 16px rgba(6, 214, 236, 0.3);
+  }
+  .field-turq::placeholder {
+    color: #6b7280;
+  }
+
+  /* Turquoise outlined container (tab switcher) */
+  .tabs-turq {
+    background: #1c1c1c;
+    border: 1.5px solid var(--turq-line);
+    box-shadow: 0 0 0 1px rgba(15, 239, 240, 0.08), 0 0 12px rgba(6, 214, 236, 0.12);
+  }
+
+  /* Turquoise brushed text + divider (splash screen) */
+  .text-turq-metal {
+    background: linear-gradient(90deg, #067e92 0%, #08ddf0 28%, #0fefef 50%, #08ddf0 72%, #067e92 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 0 6px rgba(15, 239, 240, 0.35));
+  }
+  .line-turq-metal {
+    background: linear-gradient(90deg, rgba(6, 126, 146, 0) 0%, #08ddf0 30%, #0fefef 50%, #08ddf0 70%, rgba(6, 126, 146, 0) 100%);
+  }
+
+  /* Splash screen timeline (3.5 s): globe 0–2 s, text 1.2–2.8 s, fade-out 2.8–3.5 s */
+  .splash-root {
+    animation: splash-out 0.7s ease-in 2.8s forwards;
+  }
+  .splash-globe {
+    opacity: 0;
+    animation: splash-globe-in 0.5s ease-out 0s forwards;
+  }
+  .splash-text {
+    opacity: 0;
+    animation: splash-text-in 1.6s ease-out 1.2s forwards;
+  }
+}
+
+@keyframes splash-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes splash-globe-in { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes splash-text-in {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}

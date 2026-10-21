@@ -1,0 +1,90 @@
+html, body {
+  background-color: #141414;
+  overflow-x: hidden;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: transparent !important;
+}
+
+.kn-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  animation: kn-splash-out 0.7s ease-in 2.8s forwards;
+}
+
+.kn-splash-globe {
+  opacity: 0;
+  animation: kn-splash-globe-in 0.5s ease-out 0s forwards;
+}
+
+.kn-splash-text {
+  margin-top: 8px;
+  text-align: center;
+  opacity: 0;
+  animation: kn-splash-text-in 1.6s ease-out 1.2s forwards;
+}
+
+.kn-splash-title {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  color: #ffffff;
+  text-shadow: 0 0 18px rgba(15, 239, 240, 0.55);
+}
+
+.kn-splash-line {
+  width: 96px;
+  height: 2px;
+  margin: 12px auto 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(6, 126, 146, 0) 0%, #08ddf0 30%, #0fefef 50%, #08ddf0 70%, rgba(6, 126, 146, 0) 100%);
+}
+
+.kn-splash-tagline {
+  margin: 12px 0 0;
+  padding-left: 0.22em;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  background: linear-gradient(90deg, #067e92 0%, #08ddf0 28%, #0fefef 50%, #08ddf0 72%, #067e92 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 6px rgba(15, 239, 240, 0.35));
+}
+
+@keyframes kn-splash-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes kn-splash-globe-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes kn-splash-text-in {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+.kn-globe-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
